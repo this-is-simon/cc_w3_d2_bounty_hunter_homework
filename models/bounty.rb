@@ -42,6 +42,9 @@ class Bounty
     "
 
     values = [@name, @species, @value, @danger_level, @id]
+
+    db.prepare("update", sql)
+    db.exec_prepared("update", values)
   end
 
   def Bounty.delete_all
