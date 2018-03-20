@@ -52,7 +52,14 @@ class Bounty
 
     sql = "SELECT * FROM bounties"
     db.prepare("get all", sql)
-    orders = db.exec_prepared("get all")
+    bounties = db.exec_prepared("get all")
+
+    db.close()
+
+    bounty_objects = bounties.map { |bounty_hash|
+    Bounty.new(bounty_hash)}
+
+    return bounty_objects
   end
 
   def Bounty.delete_all
