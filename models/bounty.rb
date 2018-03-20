@@ -3,7 +3,8 @@ require('pry')
 
 class Bounty
 
-  attr_reader :name, :species, :value, :danger_level
+  attr_accessor :name, :species, :value, :danger_level
+  attr_reader :id
 
   def initialize( options )
     @species = options['species']
@@ -29,8 +30,29 @@ class Bounty
 
   end
 
-  # def Bounty.delete_all
-  #   db = PG.connect
-  # end
+  def update
+    db = PG.connect( { dbname: 'bounty_hunter', host: 'localhost'} )
+
+    sql = "
+      UPDATE bounties
+      SET (name, species, value, danger_level)
+      = ($1, $2, $3, $4)
+      WHERE id = $5
+      ;
+    "
+
+    values = [@name, @species, @value, @danger_level, @id]
+  end
+
+  def Bounty.delete_all
+    db = PG.connect( {dbname: 'bounty_hunter', host: 'localhost'} )
+
+    sql = "DELETE FROM bounties;"
+
+    db.prepare("delete all", sql)
+    orders = db.exec_prepared("delete all")
+
+    db.close()
+  end
 
 end
