@@ -47,6 +47,14 @@ class Bounty
     db.exec_prepared("update", values)
   end
 
+  def Bounty.all
+    db = PG.connect ( { dbname: 'bounty_hunter', host: 'localhost'} )
+
+    sql = "SELECT * FROM bounties"
+    db.prepare("get all", sql)
+    orders = db.exec_prepared("get all")
+  end
+
   def Bounty.delete_all
     db = PG.connect( {dbname: 'bounty_hunter', host: 'localhost'} )
 
