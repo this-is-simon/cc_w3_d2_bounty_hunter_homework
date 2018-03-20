@@ -15,7 +15,9 @@ class Bounty
   VALUES (
     $1, $2, $3, $4
   )
-  ";
+  "
+  values = [@name, @species, @value, @danger_level]
+  ;
   end
 
 end
