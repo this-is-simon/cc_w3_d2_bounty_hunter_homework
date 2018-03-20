@@ -27,4 +27,13 @@ bounty1.save()
 bounty2.save()
 bounty3.save()
 
-p Bounty.all
+all_bounties = Bounty.all()
+
+first_object = all_bounties.first
+first_object.name = "Gorthok the Destroyer"
+first_object.update()
+first_object.delete()
+
+all_bounties = Bounty.all()
+
+puts first_object
