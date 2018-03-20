@@ -13,7 +13,6 @@ options_hash2 = {
 bounty1 = Bounty.new(options_hash1)
 bounty2 = Bounty.new(options_hash2)
 
-binding.pry
 # Bounty.delete_all()
 
 bounty1.save()
